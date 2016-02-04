@@ -76,9 +76,7 @@ $ python $CONCOCT_dir/scripts/gen_input_table.py contigs/StrainMock_Contigs_cutu
 ```sh
 $ python $CONCOCT_dir/scripts/fasta_to_features.py contigs/StrainMock_Contigs_cutup_10K_nodup_filter_1K.fasta 9417 4 input/kmer_4_tmp.csv
 ```
-```
 **Notice:** Here 9417 is the number of contigs number in contigs/StrainMock_Contigs_cutup_10K_nodup_filter_1K.fasta
-```
 
 
 ----------
