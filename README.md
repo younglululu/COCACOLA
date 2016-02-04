@@ -28,7 +28,7 @@ Please try to execute 'example.m' to learn how to use this software given the in
 Preprocessing
 ---------------
 
-The preprocessing steps aim to extract coverage profile and sequence composition profile as input to our program.
+The preprocessing steps aim to extract coverage profile and sequence composition profile as input to our program. 
 
 
 
