@@ -28,7 +28,13 @@ Please try to execute 'example.m' to learn how to use this software given the in
 Preprocessing
 ---------------
 
-The preprocessing steps aim to extract coverage profile and sequence composition profile as input to our program. 
+The preprocessing steps aim to extract coverage profile and sequence composition profile as input to our program, which can be tackled by CONCOCT [4]. Here we provide a step-by-step guidance on simulated 'strain' dataset: 
+
+####<i class="icon-cog"> Switch the current working directory to the Data folder
+
+```sh
+$ cd data/StrainMock
+```
 
 
 
