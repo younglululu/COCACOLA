@@ -30,11 +30,19 @@ Preprocessing
 
 The preprocessing steps aim to extract coverage profile and sequence composition profile as input to our program, which can be tackled by CONCOCT [4]. Here we provide a step-by-step guidance on simulated 'strain' dataset: 
 
-####<i class="icon-cog"> Switch the current working directory to the Data folder
-
+First of all, we changes the current working directory to the data folder.
 ```sh
 $ cd data/StrainMock
 ```
+We need to set the directories of dependency software in environmental variables. Notice that the setting in the example may differ from your own.
+```sh
+$ CONCOCT_dir=/home/cmb-panasas2/ylu465/CONCOCT-master/
+$ BOWTIE_dir=/home/cmb-panasas2/ylu465/bowtie2-2.2.3/
+$ SAMTOOLS_dir=/home/cmb-panasas2/ylu465/samtools-1.1/bin/
+```
+
+
+
 
 
 
