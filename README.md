@@ -1,3 +1,6 @@
+Welcome to use COCACOLA (binning metagenomic contigs using sequence COmposition, read CoverAge, CO-alignment, and paired-end read LinkAge)!
+===================
+
 Thank you for downloading this MATLAB software for COCACOLA. COCACOLA is a general framework that combines different types of information: sequence composition, coverage across multiple samples, coverage correlation and paired-end reads linkage to automatically bin contigs into OTUs. Furthermore, COCACOLA seamlessly embraces customized prior knowledge to facilitate binning accuracy.
 
 Usage Description
