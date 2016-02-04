@@ -1,7 +1,7 @@
 Welcome to use COCACOLA (binning metagenomic contigs using sequence COmposition, read CoverAge, CO-alignment, and paired-end read LinkAge)!
 ===================
 
-Thank you for downloading this MATLAB software for COCACOLA. COCACOLA is a general framework that combines different types of information: sequence composition, coverage across multiple samples, coverage correlation and paired-end reads linkage to automatically bin contigs into OTUs. Furthermore, COCACOLA seamlessly embraces customized prior knowledge to facilitate binning accuracy.
+COCACOLA is a general framework that combines different types of information: sequence COmposition, CoverAge across multiple samples, CO-alignment to reference genomes and paired-end reads LinkAge to automatically bin contigs into OTUs. Furthermore, COCACOLA seamlessly embraces customized prior knowledge to facilitate binning accuracy.
 
 Usage Description
 ---------------
@@ -25,7 +25,10 @@ Please try to execute 'example.m' to learn how to use this software given the in
 Contacts and bug reports
 ------------------------
 Please send bug reports, comments, or questions to 
-Yang Lu (ylu465@usc.edu) or Prof. Fengzhu Sun (fsun@usc.edu)
+
+Yang Lu: [ylu465@usc.edu](mailto:ylu465@usc.edu)
+
+Prof. Fengzhu Sun: [fsun@usc.edu](mailto:fsun@usc.edu)
 
 
 Copyright and License Information
@@ -52,6 +55,7 @@ References
 [1] Kim, H., Park, H.: Nonnegative matrix factorization based on alternating nonnegativity constrained least squares and active set method. SIAM Journal on Matrix Analysis and Applications 30(2), 713-730 (2008)
 [2] Kim, J., He, Y., Park, H.: Algorithms for nonnegative matrix and tensor factorizations: A unified view based on block coordinate descent framework. Journal of Global Optimization 58(2), 285-319 (2014)
 [3] http://www.vlfeat.org/
+[4] Alneberg, J., Bjarnason, B.S., de Bruijn, I., Schirmer, M., Quick, J., Ijaz, U.Z., Lahti, L., Loman, N.J., Andersson, A.F., Quince, C.: Binning metagenomic contigs by coverage and composition. Nature Methods 11(11), 1144-1146 (2014)
 
 
-Last update: 25-Oct-2015
+Last update: 02-Feb-2016
