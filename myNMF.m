@@ -48,7 +48,7 @@ function [W,H,label]=myNMF(X,weightMat,k,options)
     par.BETA = 1;
     par.MIN_ITER = 5;
     par.MAX_ITER = 20;
-    par.TOL = 1e-3;
+    par.TOL = 1;
     
     W = rand(m,k);
     H = rand(k,n);
@@ -66,13 +66,11 @@ function [W,H,label]=myNMF(X,weightMat,k,options)
     % process weight matrix to the regularized Laplacian
     fprintf('[t=%f] Starting processing weight matrix... \n', toc);
     if size(weightMat,1) ~= n || size(weightMat,2) ~= n, weightMat(n,n) = 0; end
-        
+      
     A = weightMat + weightMat';
-    Dcol = (full(max(sum(A)))+1)*ones(n,1);
+    Dcol = full(sum(A,2));
     D_mhalf = spdiags(Dcol .^-.5,0,n,n);
     D_mhalf(isinf(D_mhalf)) = 0;
-    selfDiag = spdiags((full(max(sum(A)))+1)*ones(n,1)-full(sum(A, 2)),0,n,n);
-    A = A + selfDiag;
     A = D_mhalf*A*D_mhalf;
 
     if par.MODE == 2 && par.BETA == 0, par.MODE = 1; end;
@@ -106,7 +104,7 @@ function [W,H,label]=myNMF(X,weightMat,k,options)
         salphaE = sqrt(par.ALPHA).*ones(1,k);
     end
     
-    prevWH = W*H; prevDiffVal = Inf;  prevH = H;    
+    prevWH = W*H; prevDiffVal = Inf; prevH = H; 
     % starting the optimization   
     fprintf('[t=%f] Starting the optimization... \n', toc);
     for iter=1:par.MAX_ITER
@@ -114,10 +112,11 @@ function [W,H,label]=myNMF(X,weightMat,k,options)
             case 1
                 H = nnlsm([W;salphaE],[X;zero1n],H,'as',sigmaHN); 
             case 2
-                H = nnlsm([W;salphaE;sbetaI],[X;zero1n;sqrt(par.BETA)*(H*A)],H,'as',sigmaHN);
+                H = nnlsm([W;salphaE;sbetaI],[X;zero1n;sqrt(par.BETA)*(prevH*A)],H,'as',sigmaHN);
         end
         fprintf('[t=%f] Finished solving H \n', toc);
-
+        prevH = H;
+        
         [~,idx] = max(H,[],1); label0 = idx';
         H = spconvert([label0 (1:1:length(label0))' ones(length(label0),1)]);
         if size(H,1) < size(W,2), H(size(W,2),n) = 0; end;
@@ -126,15 +125,15 @@ function [W,H,label]=myNMF(X,weightMat,k,options)
         
         currWH = W*H;
         diffVal = sum(sum(abs((prevWH-currWH)))) / 1e4; disp(['diffVal=',num2str(diffVal)])
-        
-        if diffVal > prevDiffVal, H = prevH; break; end
-        prevH = H; prevDiffVal = diffVal; prevWH = currWH; 
-        if (diffVal <= par.TOL), break; end
+        if (diffVal <= par.TOL || diffVal == prevDiffVal), break; end
+        prevWH = currWH; prevDiffVal = diffVal;
         disp(['Finish iteration: ',num2str(iter)]);        
     end
 
     [~,idx] = max(H,[],1);
     label = idx';
+    
+    clear A D_mhalf Dcol;
 end
 
 %------------------------------------------------------------------------------------------------------------------------
