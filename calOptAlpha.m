@@ -9,7 +9,7 @@ function [alphaOpt,H2] = calOptAlpha(X, Winit, Hinit)
     options.MIN_ITER = 1;
     options.MAX_ITER = 1;
 
-    [~,H2,~] = myNMF(X1,sparse([]),size(W1,2),options); 
+    [~,H2,~] = metaNMF1(X1,sparse([]),size(W1,2),options); 
     
     y = W1'*(X1-W1*H2);
     x = H2*diag(sum(H2)-1);
