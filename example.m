@@ -125,19 +125,19 @@ n = size(X, 2);
 X = X * 1e4;
 
 % choose an empirical initial OTU number k, or you can simply choose set k by yourself
-%kArr = 5:5:200; result = [];
-%for kIdx = 1: length(kArr)
-%    candK = kArr(kIdx);
-%    
-%    options = []; options.distance = 2; options.start = 1;
-%    options.repeat = 10; options.blockLen = 1;
-%    [~,Wpre,~] = myKmeansPar(X,candK,options);
-%    ratio = size(Wpre,2)/candK;
-%    result = [result; [candK size(Wpre,2) ratio]];
-%    if ratio <= 0.5, break; end     
-%end
-%k = result(end,2)*2; 
-k = 48;
+kArr = 20:10:n; 
+for kIdx = 1: length(kArr)
+candK = kArr(kIdx);
+options = []; options.distance = 2; options.start = 1;
+options.repeat = 10; options.blockLen = 1;
+[~,Wpre,~] = myKmeansPar(X,candK,options);
+
+if size(Wpre,2) < candK,
+    k = size(Wpre,2)*2;
+    break;
+end    
+end
+%k = 48;
 
 % initialize W and H by k-means clustering with L1-distance
 [W0, label0] = vl_kmeans(X,k,'Initialization', 'RANDSEL', 'NumRepetitions', 10, 'distance', 'l1', 'algorithm', 'elkan');
