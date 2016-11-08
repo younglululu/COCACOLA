@@ -1,4 +1,5 @@
 addpath('nmf_bpas')
+addpath('Ncut_9')
 
 run('vlfeat-0.9.20/toolbox/vl_setup')
 
@@ -12,6 +13,8 @@ contigNameListURL = 'data/StrainMock/input/namelist.txt';
 contigSampleCovMatURL = 'data/StrainMock/input/covMat_inputtableR.csv';
 contigSampleCompositMatURL = 'data/StrainMock/input/compositMat_inputtableR.csv';
 linkageMatURL = 'data/StrainMock/input/linkageMat.csv';
+originMatURL = 'data/StrainMock/input/distMat_origin.csv';
+
 
 % preprocessing the raw input into the format required by COCACOLA
 fid1 = fopen(covInputTableURL,'r');
@@ -138,6 +141,11 @@ if size(Wpre,2) < candK,
 end    
 end
 %k = 48;
+
+A_unsup = getKnnGraph1(X, originMatURL, 100);
+[NcutDiscrete,NcutEigenvectors,~,NcutEigenvectors1,EigenVectors2] = ncutW(A_unsup,size(Wpre,2));
+Xspec = EigenVectors2'; X = Xspec - min(min(Xspec));
+
 
 % initialize W and H by k-means clustering with L1-distance
 [W0, label0] = vl_kmeans(X,k,'Initialization', 'RANDSEL', 'NumRepetitions', 10, 'distance', 'l1', 'algorithm', 'elkan');
