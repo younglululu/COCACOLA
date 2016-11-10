@@ -87,12 +87,12 @@ function [W,H,label]=myNMF(X,weightMat,k,options)
     if ~isfield(options,'ALPHA'), 
         Htmp = nnlsm(W,X,H,'as',sigmaHN);
         yval = W'*(X-W*Htmp);
-        xval = Htmp*diag(sum(Htmp)-1);
+        xval = Htmp .* repmat(sum(Htmp)-1, size(Htmp,1),1);
         alphaOpt = (sum(sum(xval.*yval))-sum(xval(:))*mean(yval(:)))/(sum(sum(xval.*2))-sum(xval(:))*mean(xval(:)));
         alphaOpt = alphaOpt/size(X, 1);
         if isnan(alphaOpt) || isinf(alphaOpt), alphaOpt = mean(X(:)); end
-        
-        par.ALPHA = alphaOpt;
+               
+        par.ALPHA = alphaOpt; clear Htmp;
         fprintf('ALPHA is selected as %f \n', par.ALPHA);
     end
     
@@ -133,7 +133,7 @@ function [W,H,label]=myNMF(X,weightMat,k,options)
     [~,idx] = max(H,[],1);
     label = idx';
     
-    clear A D_mhalf Dcol;
+    clear A D_mhalf Dcol currWH prevWH;
 end
 
 %------------------------------------------------------------------------------------------------------------------------
