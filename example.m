@@ -154,8 +154,6 @@ label0 = double(label0)';
 H0 = spconvert([label0 (1:1:length(label0))' ones(length(label0),1)]);
 if size(H0,1) < size(W0,2), H0(size(W0,2),n) = 0; end;
 
-alphaOpt = calOptAlpha(X, W0, H0);
-
 fid = fopen(contigNameListURL,'r'); contigsNameList = textscan(fid,'%s'); fclose(fid);
 
 outputInitWURL = 'data/StrainMock/output/W_init_full.csv';
@@ -188,7 +186,6 @@ fclose(fid);
 X1 = X; W1 = Wagg; H1 = Hagg;
 options = [];
 options.MODE = 1;
-options.ALPHA = alphaOpt;
 options.W_INIT = W1;
 options.H_INIT = H1;
 
@@ -233,7 +230,6 @@ for betaIdx = 1:length(betaArr)
     X1 = X; W1 = Wagg; H1 = Hagg;
     options = [];
     options.MODE = 2;
-    options.ALPHA = alphaOpt;
     options.BETA = beta;
     options.W_INIT = W1;
     options.H_INIT = H1;
