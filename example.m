@@ -135,7 +135,7 @@ options = []; options.distance = 2; options.start = 1;
 options.repeat = 10; options.blockLen = 1;
 [~,Wpre,~] = myKmeansPar(X,candK,options);
 
-if size(Wpre,2) < candK,
+if size(Wpre,2) < candK*0.8,
     k = size(Wpre,2)*2;
     break;
 end    
