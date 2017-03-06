@@ -3,7 +3,11 @@ Welcome to use COCACOLA (binning metagenomic contigs using sequence COmposition,
 
 COCACOLA is a general framework that combines different types of information: sequence COmposition, CoverAge across multiple samples, CO-alignment to reference genomes and paired-end reads LinkAge to automatically bin contigs into OTUs. Furthermore, COCACOLA seamlessly embraces customized prior knowledge to facilitate binning accuracy.
 
+News: Python version of COCACOLA is available now! 
 
+
+Matlab-version of COCACOLA
+============
 ----------
 Description
 ---------------
@@ -97,6 +101,104 @@ $ python $CONCOCT_dir/scripts/fasta_to_features.py contigs/StrainMock_Contigs_cu
 **Notice:** Here 9417 is the number of contigs number in contigs/StrainMock_Contigs_cutup_10K_nodup_filter_1K.fasta
 
 
+
+Python-version of COCACOLA
+============
+----------
+Setup Anaconda
+---------------
+Here we describe using Anaconda to run python version of COCACOLA on Linux/Unix. Anaconda is a tool to isolate your python installation, which allows you to have multiple parallel installations using different versions of different packages, and gives you a very convenient and fast way to install the most common scientific python packages. Anaconda can be downloaded from [here](https://www.continuum.io/downloads)
+
+After installing Anaconda, create a new environment that will contain the COCACOLA installation:
+
+```sh
+$ conda create -n cocacola_env python=2.7.6
+```
+
+After creating the Anaconda environment, run the following command to activate it:
+
+```sh
+$ source activate cocacola_env
+```
+
+After that,  install the COCACOLA dependencies into this environment:
+
+```sh
+$ conda install numpy scipy pandas scikit-learn cvxopt
+```
+
+----------
+Download
+---------------
+
+> 1. Download the python version of COCACOLA from [here](https://www.dropbox.com/s/ciebt2y5h7pb9r2/COCACOLA-python.zip?dl=0)
+> 2. Unzip it
+> 3. Change the working directory to the unzipped folder
+
+----------
+Usage
+---------------
+
+The command can be viewed by typing ``python cocacola.py -h`` on the command line:
+
+> - Uage: cocacola.py [-h] [--contig_file CONTIG_FILE]
+                   [--abundance_profiles ABUNDANCE_PROFILES]
+                   [--composition_profiles COMPOSITION_PROFILES]
+                   [--edge_list EDGE_LIST] [--output OUTPUT]
+                   [--clusters CLUSTERS]
+
+> - optional arguments:
+
+	-h, --help: show this help message and exit. 
+				
+	--contig_file CONTIG_FILE: 
+    					The contigs file.
+	
+	--abundance_profiles ABUNDANCE_PROFILES: 
+    					The abundance profiles, containing a table where each
+                        row correspond to a contig, and each column correspond
+                        to a sample. All values are separated with tabs.
+    
+    --composition_profiles: 
+    					The composition profiles, containing a table where
+                        each row correspond to a contig, and each column
+                        correspond to the kmer composition of particular kmer.
+                        All values are separated with comma.
+				
+	--edge_list EDGE_LIST: 
+    					The edges encoding either the co-alignment or the
+                        pair-end linkage information, one row for one edge in
+                        the format: contig_name_A contig_name_B weight. The
+                        edge is undirected.
+	
+	--output OUTPUT: 
+    					The output file, storing the binning result. If not
+                        specified, the result is displayed directly on the
+                        console.
+    
+    --clusters CLUSTERS: 
+    					Specify the number of clusters. If not specified, the
+                        cluster number is estimated by single-copy genes.
+
+----------
+Example without Using Additional Information
+---------------
+
+```sh
+$ python cocacola.py --contig_file data/SpeciesMock/input/SpeciesMock_Contigs_cutup_10K_nodup_filter_1K.fasta --abundance_profiles data/SpeciesMock/input/cov_inputtableR.tsv --composition_profiles data/SpeciesMock/input/kmer_4.csv --output data/SpeciesMock/result.csv
+```
+----------
+Example Using Additional Information
+---------------
+
+```sh
+$ python cocacola.py --contig_file data/SpeciesMock/input/SpeciesMock_Contigs_cutup_10K_nodup_filter_1K.fasta --abundance_profiles data/SpeciesMock/input/cov_inputtableR.tsv --composition_profiles data/SpeciesMock/input/kmer_4.csv --edge_list data/SpeciesMock/input/linkage.txt --output data/SpeciesMock/result_link.csv
+```
+```sh
+$ python cocacola.py --contig_file data/SpeciesMock/input/SpeciesMock_Contigs_cutup_10K_nodup_filter_1K.fasta --abundance_profiles data/SpeciesMock/input/cov_inputtableR.tsv --composition_profiles data/SpeciesMock/input/kmer_4.csv --edge_list data/SpeciesMock/input/coalign.txt --output data/SpeciesMock/result_coalign.csv
+```
+
+
 ----------
 Contacts and bug reports
 ------------------------
@@ -139,4 +241,4 @@ References
 [4] Alneberg, J., Bjarnason, B.S., de Bruijn, I., Schirmer, M., Quick, J., Ijaz, U.Z., Lahti, L., Loman, N.J., Andersson, A.F., Quince, C.: Binning metagenomic contigs by coverage and composition. Nature Methods 11(11), 1144-1146 (2014)
 
 
-Last update: 02-Feb-2016
+Last update: 05-Mar-2017
