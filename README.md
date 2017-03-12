@@ -134,6 +134,7 @@ Download
 > 1. Download the python version of COCACOLA from [here](https://www.dropbox.com/s/ciebt2y5h7pb9r2/COCACOLA-python.zip?dl=0)
 > 2. Unzip it
 > 3. Change the working directory to the unzipped folder
+> 4. Notice that if you are not using Linux/Unix, you need to re-compile the FragGeneScan and hmmer under the auxiliary folder, which is used to estimate the initial bin number by single-copy genes (credits owe to MaxBin2.0 [5]).
 
 ----------
 Usage
@@ -240,5 +241,6 @@ References
 
 [4] Alneberg, J., Bjarnason, B.S., de Bruijn, I., Schirmer, M., Quick, J., Ijaz, U.Z., Lahti, L., Loman, N.J., Andersson, A.F., Quince, C.: Binning metagenomic contigs by coverage and composition. Nature Methods 11(11), 1144-1146 (2014)
 
+[5] Wu, Yu-Wei, Blake A. Simmons, and Steven W. Singer. "MaxBin 2.0: an automated binning algorithm to recover genomes from multiple metagenomic datasets." Bioinformatics, btv638 (2015)
 
 Last update: 05-Mar-2017

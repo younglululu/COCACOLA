@@ -128,19 +128,18 @@ n = size(X, 2);
 X = X * 1e4;
 
 % choose an empirical initial OTU number k, or you can simply choose set k by yourself
-kArr = 20:10:n; 
-for kIdx = 1: length(kArr)
-candK = kArr(kIdx);
-options = []; options.distance = 2; options.start = 1;
-options.repeat = 10; options.blockLen = 1;
-[~,Wpre,~] = myKmeansPar(X,candK,options);
-
-if size(Wpre,2) < candK*0.8,
-    k = size(Wpre,2)*2;
-    break;
-end    
-end
-%k = 48;
+%kArr = 20:10:n; 
+%for kIdx = 1: length(kArr)
+%candK = kArr(kIdx);
+%options = []; options.distance = 2; options.start = 1;
+%options.repeat = 10; options.blockLen = 1;
+%[~,Wpre,~] = myKmeansPar(X,candK,options);
+%if size(Wpre,2) < candK*0.8,
+%    k = size(Wpre,2)*2;
+%    break;
+%end    
+%end
+k = 48;
 
 A_unsup = getKnnGraph1(X, originMatURL, 100);
 [NcutDiscrete,NcutEigenvectors,~,NcutEigenvectors1,EigenVectors2] = ncutW(A_unsup,size(Wpre,2));
